@@ -15,9 +15,9 @@ class Counter extends Component {
                 <CounterControl label="Add 5" clicked={this.props.onAddCounter}  />
                 <CounterControl label="Subtract 5" clicked={this.props.onSubtractCounter}  />
                 <hr />
-                <button onClick={this.props.onStoreResult}>Store Result</button>
+                <button onClick={() => this.props.onStoreResult(this.props.ctr)}>Store Result</button>
                 <ul>
-                  {this.props.results.map((result, key) => (
+                  {this.props.result.map((result, key) => (
                     <li onClick={() => this.props.onRemoveResult(result.id)} key={key}>{result.value}</li>
                   ))}
                 </ul>
@@ -28,8 +28,8 @@ class Counter extends Component {
     
 const mapStateToProps = state => {
   return {
-    ctr: state.counter,
-    results: state.results
+    ctr: state.ctr.counter,
+    result: state.res.result
   };
 }
 
@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => {
     onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT }),
     onAddCounter: () => dispatch({ type: actionTypes.ADD, payload: 5 }),
     onSubtractCounter: () => dispatch({ type: actionTypes.SUBTRACT, payload: 5 }),
-    onStoreResult: () => dispatch({ type: actionTypes.STORE_RESULT }),
+    onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULT, result: result }),
     onRemoveResult: (elId) => dispatch({ type: actionTypes.REMOVE_RESULT, resultId: elId })
   };
 }
