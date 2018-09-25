@@ -20,7 +20,6 @@ const logger = (store) => {
     return (action) => {
       console.log("[middleware] Dispatching", action);
       const result = next(action);
-      console.log("[middleware] result", result);
       console.log("[middleware] next state", store.getState());
       return result;
     }
